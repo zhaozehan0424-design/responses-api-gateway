@@ -1,28 +1,7 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/api/site/closed",
-      "permanent": false
-    },
-    {
-      "source": "/index.html",
-      "destination": "/api/site/closed",
-      "permanent": false
-    },
-    {
-      "source": "/docs",
-      "destination": "/api/site/closed",
-      "permanent": false
-    },
-    {
-      "source": "/docs.html",
-      "destination": "/api/site/closed",
-      "permanent": false
-    }
-  ],
+  "redirects": [],
   "rewrites": [
     {
       "source": "/admin",
@@ -38,7 +17,7 @@
     },
     {
       "source": "/dashboard",
-      "destination": "/api/site/closed"
+      "destination": "/api/dashboard/page"
     },
     {
       "source": "/site/stats",
