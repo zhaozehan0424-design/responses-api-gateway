@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+*.log
+litellm_pgdata/
+.vercel/
+node_modules/
+outputs/
+work/
+local-secrets.txt
+*.zip
+.DS_Store
+
+.vercel

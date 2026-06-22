@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title data-title-suffix="管理面板">Relay Hub · 管理面板</title>
+    <meta
+      name="description"
+      content="Relay Hub 管理配置助手：生成身份组、模型权限、Discord 用户分组映射和 Vercel 环境变量命令。"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script src="/assets/config.js"></script>
+    <script src="/assets/ui.js" defer></script>
+    <script src="/assets/admin.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="/" aria-label="返回首页">
+          <img src="/favicon.svg" alt="" width="26" height="26" />
+          <span data-brand>Relay Hub</span>
+        </a>
+        <nav class="nav-links" aria-label="主导航">
+          <a href="/">首页</a>
+          <a href="#logs">调用日志</a>
+          <a href="/docs" data-docs-link>调用文档</a>
+          <a href="/#models">模型</a>
+          <a href="/admin?logout=1">退出</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container section admin-shell">
+      <div class="admin-hero">
+        <div>
+          <p class="eyebrow">管理员</p>
+          <h1>运营工作台</h1>
+          <p class="muted">
+            面向日常管理重做：先看异常和排行，再点进单个用户处理额度、分组、日志和封禁。
+            明文 API Key 不会在这里展示。
+          </p>
+        </div>
+        <div class="admin-hero__aside">
+          <span class="badge">Admin</span>
+          <a class="copy-btn btn--sm" href="#registrations">用户管理</a>
+          <a class="copy-btn btn--sm" href="#logs">日志审计</a>
+          <a class="copy-btn btn--sm" href="#policy">权限配置</a>
+        </div>
+      </div>
+
+      <div class="callout callout--warn admin-notice">
+        <span>!</span>
+        <span>
+          用户管理里的改分组、改额度、重置额度、踢出用户会直接生效。下面“权限配置”里的模型权限、
+          全局封禁 Key Hash、封禁 Discord ID 只是生成 Vercel 环境变量命令，需要写入环境变量并重新部署后才生效。
+        </span>
+      </div>
+
+      <section class="section--tight" id="logs">
+        <div class="admin-panel stack">
+          <div class="admin-panel__head">
+            <div>
+              <p class="eyebrow">日志</p>
+              <h2>调用日志审计</h2>
+              <p class="muted">
+                按用户、模型、接口和错误快速过滤；点击任意一条日志查看完整参数。
+              </p>
+            </div>
+            <div class="admin-log-actions">
+              <button class="copy-btn" type="button" data-refresh-logs>
+                <span class="copy-label">刷新</span>
+              </button>
+              <button class="copy-btn copy-btn--danger" type="button" data-clear-logs>
+                <span class="copy-label">清空</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="admin-toolbar admin-toolbar--logs">
+            <label>
+              <span class="field-label">Admin Token（可选）</span>
+              <input
+                class="field"
+                type="password"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="已登录可留空；必要时填入 ADMIN_TOKEN"
+                data-admin-token
+              />
+            </label>
+            <label>
+              <span class="field-label">条数</span>
+              <input class="field" type="number" min="1" max="500" step="10" value="100" data-log-limit />
+            </label>
+            <label>
+              <span class="field-label">搜索</span>
+              <input
+                class="field"
+                type="search"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="用户 / DC ID / 模型 / Key / 错误码"
+                data-log-query
+              />
+            </label>
+            <label>
+              <span class="field-label">状态</span>
+              <select class="field" data-log-status-filter>
+                <option value="">全部</option>
+                <option value="success">成功</option>
+                <option value="error">错误</option>
+                <option value="upstream">上游错误</option>
+                <option value="rate_limit">限流</option>
+                <option value="quota">额度</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="log-status muted" data-log-status>尚未读取日志。</div>
+          <div class="admin-log-summary" data-log-summary></div>
+
+          <div class="log-explorer">
+            <aside class="log-facets" data-log-facets>
+              <div class="log-empty">读取日志后会显示筛选项。</div>
+            </aside>
+            <div class="log-results">
+              <div class="log-filter-bar">
+                <select class="field" data-log-group-filter aria-label="按分组过滤">
+                  <option value="">全部分组</option>
+                </select>
+                <select class="field" data-log-model-filter aria-label="按模型过滤">
+                  <option value="">全部模型</option>
+                </select>
+                <select class="field" data-log-agent-filter aria-label="按 Agent 过滤">
+                  <option value="">全部 Agent</option>
+                </select>
+                <select class="field" data-log-endpoint-filter aria-label="按接口过滤">
+                  <option value="">全部接口</option>
+                </select>
+              </div>
+              <div class="log-list" data-log-rows>
+                <div class="log-empty">点击刷新读取调用日志。</div>
+              </div>
+            </div>
+            <aside class="log-detail" data-log-detail>
+              <div class="log-detail__empty">
+                <strong>选择一条日志</strong>
+                <span>这里会显示模型、用户、Key、费用、token、上游错误和请求参数摘要。</span>
+              </div>
+            </aside>
+          </div>
+
+          <section class="usage-ranking" data-usage-ranking-section hidden>
+            <div class="usage-ranking-head">
+              <div>
+                <h3>用户 / Key 用量排行</h3>
+                <p class="muted">基于当前读取到的日志计算，默认按累计已用额度排序。</p>
+              </div>
+            </div>
+            <div class="usage-ranking-list" data-usage-ranking></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="section--tight" id="registrations">
+        <div class="admin-panel stack">
+          <div class="admin-panel__head">
+            <div>
+              <p class="eyebrow">注册</p>
+              <h2>Discord 用户管理</h2>
+              <p class="muted">
+                左边快速扫用户和异常，右边固定处理分组、额度、token 限制、日志和踢出。
+              </p>
+            </div>
+            <button class="copy-btn" type="button" data-refresh-registrations>
+              <span class="copy-label">刷新</span>
+            </button>
+          </div>
+
+          <div class="log-status muted" data-registration-status>尚未读取注册用户。</div>
+          <div class="admin-log-summary" data-registration-summary></div>
+          <div class="registration-board" data-registration-rows>
+            <div class="registration-empty muted">点击刷新读取注册用户。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-grid" id="policy">
+        <div class="card card--pad-lg stack">
+          <div>
+            <p class="eyebrow">身份组</p>
+            <h2>模型与接口权限</h2>
+            <p class="muted">
+              勾选每个组可见和可调用的模型。新接入建议开放 Responses；
+              通用客户端保留 Chat Completions。
+            </p>
+          </div>
+          <div class="admin-groups" data-admin-groups></div>
+        </div>
+
+        <aside class="card card--pad-lg stack">
+          <div>
+            <p class="eyebrow">Key 管理</p>
+            <h2>用户与封禁</h2>
+            <p class="muted">
+              日志读取后会在这里列出出现过的 Key。这里添加的是“待封禁配置”，需要复制生成的 Vercel 命令并重新部署后才会真正拦截。
+            </p>
+          </div>
+
+          <div class="key-list" data-key-list>
+            <div class="muted">读取调用日志后，这里会显示 Key 使用概况。</div>
+          </div>
+
+          <label class="field-label" for="blocked-key-hashes-input">封禁 Key Hash（逗号或换行分隔）</label>
+          <textarea
+            id="blocked-key-hashes-input"
+            class="field"
+            data-blocked-key-hashes-input
+            spellcheck="false"
+            placeholder="84a8fdc9c047&#10;abcdef123456"
+          ></textarea>
+
+          <div class="callout">
+            <span>i</span>
+            <span>
+              Key Hash 来自调用日志，不是明文 Key。加入后会生成
+              <code class="inline-code">GATEWAY_BLOCKED_KEY_HASHES</code>；写入 Vercel 环境变量并重新部署后才生效。
+            </span>
+          </div>
+
+          <hr class="admin-divider" />
+
+          <div>
+            <p class="eyebrow">Discord</p>
+            <h2>用户分组</h2>
+            <p class="muted">
+              每行一个 Discord 用户 ID 和组名。示例：
+              <code class="inline-code">123456789=trusted</code>
+            </p>
+          </div>
+          <label class="field-label" for="user-map-input">Discord ID 到组名</label>
+          <textarea
+            id="user-map-input"
+            class="field"
+            data-user-map-input
+            spellcheck="false"
+            placeholder="123456789012345678=trusted&#10;234567890123456789=staff"
+          ></textarea>
+
+          <label class="field-label" for="blocked-input">封禁 Discord ID（逗号或换行分隔）</label>
+          <textarea
+            id="blocked-input"
+            class="field"
+            data-blocked-input
+            spellcheck="false"
+            placeholder="123456789012345678, 234567890123456789"
+          ></textarea>
+
+          <div class="callout">
+            <span>i</span>
+            <span>
+              当前线上已限制 Discord 服务器成员登录。这里的分组映射用于把指定用户提升到
+              trusted、staff 等组。
+            </span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section--tight">
+        <div class="card card--pad-lg stack">
+          <div class="field-head">
+            <div>
+              <p class="eyebrow">输出</p>
+              <h2>生成的环境变量</h2>
+            </div>
+            <button class="copy-btn" type="button" data-copy="#groups-json">
+              <span class="copy-label">复制分组 JSON</span>
+            </button>
+          </div>
+
+          <label class="field-label" for="groups-json">GATEWAY_GROUPS_JSON</label>
+          <textarea id="groups-json" class="field admin-output" readonly data-groups-json></textarea>
+
+          <label class="field-label" for="user-map-json">DISCORD_GROUP_USER_MAP_JSON</label>
+          <textarea id="user-map-json" class="field admin-output" readonly data-user-map-json></textarea>
+
+          <label class="field-label" for="blocked-output">DISCORD_BLOCKED_USER_IDS</label>
+          <input id="blocked-output" class="field" readonly data-blocked-output />
+
+          <label class="field-label" for="blocked-key-hashes-output">GATEWAY_BLOCKED_KEY_HASHES</label>
+          <input id="blocked-key-hashes-output" class="field" readonly data-blocked-key-hashes-output />
+
+          <label class="field-label" for="vercel-commands">PowerShell / Vercel 命令</label>
+          <textarea id="vercel-commands" class="field admin-output" readonly data-vercel-commands></textarea>
+          <button class="copy-btn" type="button" data-copy="#vercel-commands">
+            <span class="copy-label">复制命令</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© <span data-year>2026</span> <span data-brand>Relay Hub</span></span>
+        <span class="nav-links">
+          <a href="/">首页</a>
+          <a href="/docs" data-docs-link>调用文档</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

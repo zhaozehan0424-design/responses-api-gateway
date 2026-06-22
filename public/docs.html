@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-title-suffix="调用文档">Relay Hub · 调用文档</title>
+    <meta
+      name="description"
+      content="Relay Hub 调用文档：cURL / Python / Node.js / PowerShell / Agent 工具示例，覆盖 models、chat.completions、responses 与流式输出。"
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script src="/assets/config.js"></script>
+    <script src="/assets/ui.js" defer></script>
+    <script src="/assets/docs.js" defer></script>
+  </head>
+  <body>
+    <!-- ── 顶部导航 ───────────────────────────────────── -->
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="/" aria-label="返回首页">
+          <img src="/favicon.svg" alt="" width="26" height="26" />
+          <span data-brand>Relay Hub</span>
+        </a>
+        <nav class="nav-links" aria-label="主导航">
+          <a href="/">首页</a>
+          <a href="/#models">模型</a>
+          <a href="#rules">使用规则</a>
+          <a href="#errors">错误码</a>
+          <a href="/dashboard">用户中心</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container section">
+      <div class="section-head">
+        <p class="eyebrow">文档</p>
+        <h1>调用文档</h1>
+        <p class="muted">
+          本网关推荐新接入优先使用 Responses API；通用 OpenAI 兼容客户端继续使用
+          Chat Completions。下面给出 cURL / Python / Node.js / PowerShell / Agent 工具的可复制示例，
+          覆盖列出模型、Responses、对话补全（含流式）三个接口。
+        </p>
+      </div>
+
+      <div class="callout callout--warn" style="margin-bottom: 28px">
+        <span class="model-mark model-mark--claude" aria-hidden="true">
+          <img src="/assets/claude-ai-symbol.svg" alt="" loading="lazy" decoding="async" />
+        </span>
+        <div>
+          <strong>模型可用性公告：</strong>
+          由于美国政府相关政策影响，模型 <code class="inline-code">claude-opus-fable</code> 暂时不可用，恢复时间将另行通知。
+        </div>
+      </div>
+
+      <div class="callout callout--warn usage-rules" id="rules" style="margin-bottom: 28px">
+        <span class="callout-icon" aria-hidden="true">!</span>
+        <div>
+          <strong>使用规则：</strong>
+          <ul>
+            <li>禁止将本站 API Key 用于 vibe coding、AI 编程、自动生成或修改代码，以及接入 Codex、Claude Code、Cline、Roo Code 等写代码任务。</li>
+            <li>禁止公开传播本站地址、Base URL、API Key，或邀请无关人员使用。</li>
+            <li>禁止滥用 Key，包括高频刷请求、转卖共享、批量注册、绕过分组限制或影响他人正常使用。</li>
+            <li>每个 Key 每分钟最多 4 次调用，超过会返回 <code class="inline-code">rate_limit_exceeded</code>。</li>
+            <li>默认 guest 按 Discord 账号共享 30 USD 额度，除 <code class="inline-code">claude-opus-fable</code> 外均可用。</li>
+          </ul>
+          <p>日常对话、翻译、摘要、角色扮演等正常用途不受影响。</p>
+        </div>
+      </div>
+
+      <!-- ── 接入信息 + Key 输入 ───────────────────────── -->
+      <div class="card card--pad-lg stack" style="margin-bottom: 28px">
+        <div>
+          <label class="field-label" for="base-url">Base URL</label>
+          <div class="copy-row">
+            <input id="base-url" class="field" readonly data-base-url value="加载中…" />
+            <button type="button" class="copy-btn" data-copy="#base-url" aria-label="复制 Base URL">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span class="copy-label">复制</span>
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="field-label" for="api-key-input">你的 API Key（可选，登录用户中心复制）</label>
+          <input
+            id="api-key-input"
+            class="field"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="粘贴你的 sk-... 或 sk-dc-... ，下面示例会自动替换"
+          />
+          <p class="muted" style="margin: 8px 0 0; font-size: 13px">
+            🔒 仅在你当前浏览器里替换示例文本，<strong>不会被发送或保存到任何服务器</strong>。
+            留空则示例显示为 <code class="inline-code">YOUR_API_KEY</code>。
+          </p>
+        </div>
+      </div>
+
+      <!-- ── 语言标签页（由 docs.js 注入）───────────────── -->
+      <section aria-label="调用示例">
+        <div class="tabs" role="tablist" aria-label="选择语言" data-tablist></div>
+        <div data-panels></div>
+      </section>
+
+      <!-- ── 错误码 ───────────────────────────────────── -->
+      <section class="section" id="errors">
+        <div class="section-head">
+          <p class="eyebrow">错误码</p>
+          <h2>常见错误码</h2>
+          <p class="muted">网关返回的错误结构为 <code class="inline-code">{ "error": { "message": "...", "code": "..." } }</code>。</p>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>HTTP</th>
+                <th>code</th>
+                <th>含义与排查</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>401</td>
+                <td><code>invalid_api_key</code></td>
+                <td>API Key 无效、被禁用或未带 <code class="inline-code">Authorization</code> 头。检查 Key 是否正确、是否已启用。</td>
+              </tr>
+              <tr>
+                <td>405</td>
+                <td><code>method_not_allowed</code></td>
+                <td>请求方法不对。比如 <code class="inline-code">/v1/models</code> 需要 GET，<code class="inline-code">/v1/responses</code> 需要 POST。</td>
+              </tr>
+              <tr>
+                <td>403</td>
+                <td><code>endpoint_not_allowed</code></td>
+                <td>当前分组不允许访问该接口（models / responses / chat.completions）。</td>
+              </tr>
+              <tr>
+                <td>403</td>
+                <td><code>model_not_allowed</code></td>
+                <td>请求的模型不在你分组的可用清单内。用 <code class="inline-code">GET /v1/models</code> 查看可用模型。</td>
+              </tr>
+              <tr>
+                <td>403</td>
+                <td><code>stream_not_allowed</code></td>
+                <td>当前分组不允许流式。去掉 <code class="inline-code">stream: true</code> 重试。</td>
+              </tr>
+              <tr>
+                <td>403</td>
+                <td><code>max_output_tokens_exceeded</code></td>
+                <td>请求的输出 token 超过成员或分组上限。调小 <code class="inline-code">max_tokens</code> / <code class="inline-code">max_output_tokens</code>。</td>
+              </tr>
+              <tr>
+                <td>403</td>
+                <td><code>max_input_tokens_exceeded</code></td>
+                <td>请求体预估输入 token 超过成员或分组上限。缩短输入内容后重试。</td>
+              </tr>
+              <tr>
+                <td>403</td>
+                <td><code>access_denied</code></td>
+                <td>Key 被封禁，或 Discord 账号未注册 / 不在类脑服务器 / 无公益站资源区权限。</td>
+              </tr>
+              <tr>
+                <td>402</td>
+                <td><code>quota_exceeded</code></td>
+                <td>当前 Discord 用户或 Key 的费用额度已用完。guest 默认按 Discord 用户共享 30 USD 额度。</td>
+              </tr>
+              <tr>
+                <td>402</td>
+                <td><code>request_cost_limit_exceeded</code></td>
+                <td>可选的单次费用上限被触发；当前站点默认关闭该限制，主要使用成员额度与 token 上限管理。</td>
+              </tr>
+              <tr>
+                <td>400</td>
+                <td><code>invalid_request</code></td>
+                <td>请求体不是合法 JSON，或缺少必要字段。</td>
+              </tr>
+              <tr>
+                <td>429</td>
+                <td><code>rate_limit_exceeded</code></td>
+                <td>请求过快。每个 Key 每分钟最多 4 次调用，超过后稍等一会儿再重试。</td>
+              </tr>
+              <tr>
+                <td>503</td>
+                <td><code>registration_store_unavailable</code></td>
+                <td>注册名单存储暂时不可用。稍后重试，或联系管理员检查 KV / Redis 配置。</td>
+              </tr>
+              <tr>
+                <td>502</td>
+                <td><code>upstream_request_failed</code></td>
+                <td>上游请求失败，稍后重试；持续失败请联系管理员。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="callout" style="margin-top: 8px">
+        <span>💡</span>
+        <span>
+          <strong>提示：</strong>每个 Key 的可用模型、是否允许流式、输入/输出 token 上限由其
+          <strong>成员设置或所属分组</strong> 决定。若调用被 403 拒绝，多半是策略限制，可联系管理员调整。
+        </span>
+      </div>
+    </main>
+
+    <!-- ── 页脚 ───────────────────────────────────────── -->
+    <footer class="site-footer">
+      <div class="container">
+        <span>© <span data-year>2026</span> <span data-brand>Relay Hub</span></span>
+        <span class="nav-links">
+          <a href="/">首页</a>
+          <a href="#errors">错误码</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

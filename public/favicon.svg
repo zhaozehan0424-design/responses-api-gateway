@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Relay Hub">
+  <rect width="32" height="32" rx="7" fill="#2563eb"/>
+  <g fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 12.5h13"/>
+    <path d="M17.5 9 21 12.5 17.5 16"/>
+    <path d="M24 19.5H11"/>
+    <path d="M14.5 16 11 19.5 14.5 23"/>
+  </g>
+</svg>

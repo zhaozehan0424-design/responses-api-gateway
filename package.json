@@ -1,0 +1,28 @@
+{
+  "name": "responses-api-gateway",
+  "version": "1.0.0",
+  "description": "A lightweight OpenAI-compatible API gateway with downstream keys, quotas, Discord registration, and Vercel deployment support.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaozehan0424-design/responses-api-gateway.git"
+  },
+  "homepage": "https://responses-api-gateway.vercel.app",
+  "keywords": [
+    "openai",
+    "responses-api",
+    "api-gateway",
+    "vercel",
+    "discord-oauth"
+  ],
+  "type": "commonjs",
+  "scripts": {
+    "start": "node gateway.js",
+    "site:status": "node scripts/site-toggle.js status",
+    "site:open": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/open-site.ps1",
+    "site:close": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/close-site.ps1"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}

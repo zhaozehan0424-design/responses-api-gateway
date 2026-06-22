@@ -1,0 +1,8 @@
+.env
+.env.*
+.vercel/
+node_modules/
+*.log
+outputs/
+work/
+local-secrets.txt

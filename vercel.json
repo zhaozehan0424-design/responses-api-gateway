@@ -1,0 +1,92 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/api/site/closed",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "destination": "/api/site/closed",
+      "permanent": false
+    },
+    {
+      "source": "/docs",
+      "destination": "/api/site/closed",
+      "permanent": false
+    },
+    {
+      "source": "/docs.html",
+      "destination": "/api/site/closed",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/api/admin/page"
+    },
+    {
+      "source": "/admin.html",
+      "destination": "/api/admin/page"
+    },
+    {
+      "source": "/admin/registrations",
+      "destination": "/api/admin/registrations"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/api/site/closed"
+    },
+    {
+      "source": "/site/stats",
+      "destination": "/api/site/stats"
+    },
+    {
+      "source": "/models",
+      "destination": "/api/v1/models"
+    },
+    {
+      "source": "/responses",
+      "destination": "/api/v1/responses"
+    },
+    {
+      "source": "/chat/completions",
+      "destination": "/api/v1/chat/completions"
+    },
+    {
+      "source": "/v1/models",
+      "destination": "/api/v1/models"
+    },
+    {
+      "source": "/v1/responses",
+      "destination": "/api/v1/responses"
+    },
+    {
+      "source": "/v1/chat/completions",
+      "destination": "/api/v1/chat/completions"
+    },
+    {
+      "source": "/v1/v1/models",
+      "destination": "/api/v1/models"
+    },
+    {
+      "source": "/v1/v1/responses",
+      "destination": "/api/v1/responses"
+    },
+    {
+      "source": "/v1/v1/chat/completions",
+      "destination": "/api/v1/chat/completions"
+    }
+  ],
+  "functions": {
+    "api/v1/responses.js": {
+      "maxDuration": 300
+    },
+    "api/v1/chat/completions.js": {
+      "maxDuration": 300
+    }
+  }
+}
