@@ -10,6 +10,11 @@ const requiredFiles = [
   "CONTRIBUTING.md",
   "SECURITY.md",
   "MAINTENANCE.md",
+  "docs/LAUNCH.md",
+  "docs/screenshots/home.png",
+  "docs/screenshots/docs.png",
+  "docs/screenshots/dashboard.png",
+  "docs/screenshots/admin.png",
   ".env.example",
   ".github/ISSUE_TEMPLATE/bug_report.md",
   ".github/ISSUE_TEMPLATE/feature_request.md",
@@ -29,6 +34,7 @@ const requiredReadmeSnippets = [
   "## Quick Start",
   "## Security Notes",
   "## Maintenance",
+  "## Screenshots",
 ];
 
 const missingReadmeSnippets = requiredReadmeSnippets.filter((snippet) => !readme.includes(snippet));

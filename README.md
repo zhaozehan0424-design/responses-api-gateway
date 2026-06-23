@@ -1,10 +1,22 @@
 # Relay Hub
 
-OpenAI-compatible API gateway for small teams, Discord communities, and self-hosted model access.
+OpenAI-compatible API gateway with downstream keys, quotas, Discord auth, admin logs, and Vercel/Docker deployment support.
 
 Relay Hub sits between users and an upstream model provider. Users call a familiar OpenAI-style `/v1` API with downstream keys, while the real upstream base URL and upstream API key stay server-side.
 
-[Live docs](https://responses-api-gateway.vercel.app/docs) - [Demo site](https://responses-api-gateway.vercel.app) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md)
+[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
+
+![Relay Hub public landing page](./docs/screenshots/home.png)
+
+## Screenshots
+
+| Public docs | User dashboard |
+| --- | --- |
+| ![Relay Hub API docs](./docs/screenshots/docs.png) | ![Relay Hub user dashboard preview with masked key](./docs/screenshots/dashboard.png) |
+
+| Admin call-log review |
+| --- |
+| ![Relay Hub admin call-log review preview with masked request data](./docs/screenshots/admin.png) |
 
 ## Why Relay Hub
 

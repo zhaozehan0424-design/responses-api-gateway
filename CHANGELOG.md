@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.2 - 2026-06-23
+
+Public launch materials and screenshots.
+
+- Added README screenshots for the landing page, docs, user dashboard, and admin call-log workflow.
+- Tightened the README opening value proposition for faster GitHub scanning.
+- Added `docs/LAUNCH.md` with Chinese and English launch posts plus a sharing checklist.
+- Prepared the screenshot issue for closure.
+
 ## v0.1.1 - 2026-06-23
 
 Maintenance and public project hygiene.
