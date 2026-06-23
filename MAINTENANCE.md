@@ -13,6 +13,7 @@ This document records public maintenance work for Relay Hub. It is intentionally
 
 ### 2026-06-23
 
+- Added adoption notes documenting prior Discord community pilot usage and Vercel usage notifications without exposing private user data.
 - Added Vercel KV / Upstash setup documentation for durable production logs, quota ledgers, and Discord registration state.
 - Documented the memory fallback behavior so operators understand which data is ephemeral without KV.
 - Added JavaScript and Python SDK examples for OpenAI-compatible clients.
@@ -64,6 +65,7 @@ This document records public maintenance work for Relay Hub. It is intentionally
 - Cut small releases for meaningful maintenance batches.
 - Keep `.env`, `.vercel/`, logs, generated outputs, and local secret files out of commits.
 - Verify production storage is `kv` before relying on durable quotas, registrations, or admin logs.
+- Keep public adoption evidence privacy-preserving: redact Discord users, account screenshots, logs, tokens, and request bodies.
 
 ## Vercel CLI DNS Helper
 

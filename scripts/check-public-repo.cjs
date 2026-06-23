@@ -4,6 +4,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const requiredFiles = [
   "README.md",
+  "ADOPTION.md",
   "LICENSE",
   "CHANGELOG.md",
   "ROADMAP.md",
@@ -41,6 +42,7 @@ const requiredReadmeSnippets = [
   "## Screenshots",
   "## SDK Examples",
   "Vercel KV",
+  "Adoption",
 ];
 
 const missingReadmeSnippets = requiredReadmeSnippets.filter((snippet) => !readme.includes(snippet));

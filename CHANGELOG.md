@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.5 - 2026-06-23
+
+Prior usage and adoption notes.
+
+- Added `ADOPTION.md` with privacy-preserving notes about the Discord community pilot.
+- Documented Vercel usage notification evidence without committing private mailbox screenshots.
+- Linked adoption notes from the README.
+- Added adoption notes to public-repo checks.
+
 ## v0.1.4 - 2026-06-23
 
 Vercel KV / Upstash deployment documentation.

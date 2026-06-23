@@ -4,7 +4,7 @@ OpenAI-compatible API gateway with downstream keys, quotas, Discord auth, admin 
 
 Relay Hub sits between users and an upstream model provider. Users call a familiar OpenAI-style `/v1` API with downstream keys, while the real upstream base URL and upstream API key stay server-side.
 
-[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [SDK examples](./docs/SDK_EXAMPLES.md) - [Vercel KV setup](./docs/VERCEL_KV_UPSTASH.md) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
+[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [Adoption](./ADOPTION.md) - [SDK examples](./docs/SDK_EXAMPLES.md) - [Vercel KV setup](./docs/VERCEL_KV_UPSTASH.md) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
 
 ![Relay Hub public landing page](./docs/screenshots/home.png)
 
@@ -243,7 +243,7 @@ Report security issues using the instructions in [SECURITY.md](./SECURITY.md).
 
 Relay Hub is early as a public open-source project, but it comes from an existing deployed gateway. The first public milestone is focused on documentation, compatibility tests, safer defaults, and deployment examples.
 
-See [ROADMAP.md](./ROADMAP.md).
+See [ADOPTION.md](./ADOPTION.md) for privacy-preserving prior-usage notes and [ROADMAP.md](./ROADMAP.md) for planned work.
 
 ## Maintenance
 
