@@ -12,6 +12,7 @@ const requiredFiles = [
   "MAINTENANCE.md",
   "docs/LAUNCH.md",
   "docs/SDK_EXAMPLES.md",
+  "docs/VERCEL_KV_UPSTASH.md",
   "examples/javascript-openai-sdk.mjs",
   "examples/python-openai-sdk.py",
   "docs/screenshots/home.png",
@@ -39,6 +40,7 @@ const requiredReadmeSnippets = [
   "## Maintenance",
   "## Screenshots",
   "## SDK Examples",
+  "Vercel KV",
 ];
 
 const missingReadmeSnippets = requiredReadmeSnippets.filter((snippet) => !readme.includes(snippet));

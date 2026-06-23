@@ -1,6 +1,6 @@
 {
   "name": "responses-api-gateway",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A lightweight OpenAI-compatible API gateway with downstream keys, quotas, Discord registration, and Vercel deployment support.",
   "license": "MIT",
   "repository": {

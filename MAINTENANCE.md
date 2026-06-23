@@ -13,6 +13,8 @@ This document records public maintenance work for Relay Hub. It is intentionally
 
 ### 2026-06-23
 
+- Added Vercel KV / Upstash setup documentation for durable production logs, quota ledgers, and Discord registration state.
+- Documented the memory fallback behavior so operators understand which data is ephemeral without KV.
 - Added JavaScript and Python SDK examples for OpenAI-compatible clients.
 - Documented SDK setup with downstream keys and Relay Hub `/v1` base URLs.
 - Added public README screenshots for the landing page, docs, user dashboard, and admin call-log workflow.
@@ -61,6 +63,7 @@ This document records public maintenance work for Relay Hub. It is intentionally
 - Update `CHANGELOG.md` whenever a user-facing behavior or operator workflow changes.
 - Cut small releases for meaningful maintenance batches.
 - Keep `.env`, `.vercel/`, logs, generated outputs, and local secret files out of commits.
+- Verify production storage is `kv` before relying on durable quotas, registrations, or admin logs.
 
 ## Vercel CLI DNS Helper
 
@@ -77,7 +80,4 @@ Do not leave `NODE_OPTIONS` set globally. This helper is only for local maintena
 ## Near-Term Backlog
 
 - Add compatibility smoke tests for `/v1/models`, `/v1/responses`, and `/v1/chat/completions`.
-- Add Vercel KV / Upstash setup docs for durable logs and quota storage.
-- Add screenshots for the public docs page, dashboard, and admin log view.
-- Add example clients for Python and JavaScript SDK users.
 - Harden Discord OAuth setup validation and admin-token handling.

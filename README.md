@@ -4,7 +4,7 @@ OpenAI-compatible API gateway with downstream keys, quotas, Discord auth, admin 
 
 Relay Hub sits between users and an upstream model provider. Users call a familiar OpenAI-style `/v1` API with downstream keys, while the real upstream base URL and upstream API key stay server-side.
 
-[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [SDK examples](./docs/SDK_EXAMPLES.md) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
+[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [SDK examples](./docs/SDK_EXAMPLES.md) - [Vercel KV setup](./docs/VERCEL_KV_UPSTASH.md) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
 
 ![Relay Hub public landing page](./docs/screenshots/home.png)
 
@@ -166,7 +166,7 @@ api_key: sk-user-key-1
 | `ADMIN_TOKEN` | Enables admin call-log viewing. |
 | `KV_REST_API_URL`, `KV_REST_API_TOKEN` | Optional durable logs and quota storage via Vercel KV / Upstash Redis. |
 
-See [.env.example](./.env.example) for the full configuration surface.
+See [.env.example](./.env.example) for the full configuration surface. See [Vercel KV / Upstash setup](./docs/VERCEL_KV_UPSTASH.md) before using Relay Hub for durable production logs, quotas, or Discord registration state.
 
 ## Identity Groups
 

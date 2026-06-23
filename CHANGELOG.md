@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.4 - 2026-06-23
+
+Vercel KV / Upstash deployment documentation.
+
+- Added `docs/VERCEL_KV_UPSTASH.md` with durable-storage setup notes.
+- Documented KV-backed call logs, quota ledgers, Discord registration state, and memory fallback behavior.
+- Linked the KV setup guide from the README.
+- Added the KV setup guide to public-repo checks.
+- Prepared the Vercel KV / Upstash documentation issue for closure.
+
 ## v0.1.3 - 2026-06-23
 
 SDK compatibility examples.
