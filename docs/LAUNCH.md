@@ -15,14 +15,14 @@ I would love feedback on deployment docs, SDK compatibility, and security harden
 
 ## Short Chinese Post
 
-我开源了一个 OpenAI-compatible API gateway：Relay Hub。
+我开源了一个 OpenAI-compatible API gateway，叫 Relay Hub。
 
-它适合小团队或 Discord 社区共享模型 API：用户拿到的是下游 key，上游 API key 只保存在服务端。支持 `/v1/models`、`/v1/responses`、`/v1/chat/completions`，还有额度、限速、Discord 注册、管理员日志、Vercel 部署和 Docker。
+它适合小团队或 Discord 社区共享模型 API：用户拿到的是下游 key，上游 API key 只保存在服务端。项目支持 `/v1/models`、`/v1/responses`、`/v1/chat/completions`，还有额度、限速、Discord 注册、管理员日志、Vercel 部署和 Docker。
 
-仓库： https://github.com/zhaozehan0424-design/responses-api-gateway  
-演示/文档： https://responses-api-gateway.vercel.app
+仓库：https://github.com/zhaozehan0424-design/responses-api-gateway  
+演示/文档：https://responses-api-gateway.vercel.app
 
-欢迎试用、提 issue，尤其想收集部署文档、SDK 兼容性和安全加固方面的反馈。
+欢迎试用和提 issue，尤其想收集部署文档、SDK 兼容性和安全加固方面的反馈。
 
 ## Longer English Post
 
@@ -46,7 +46,7 @@ The project is early as public OSS, but it comes from an existing deployed gatew
 
 最近把自己之前用的一个 OpenAI-compatible API gateway 开源了，叫 Relay Hub。
 
-主要场景是：你想给小团队、朋友、Discord 社区共享模型 API，但不想把真正的上游 key 直接发出去。Relay Hub 放在中间，用户使用下游 key 调 `/v1` 接口，上游 key 只保存在服务端。
+主要场景是：你想给小团队、朋友或 Discord 社区共享模型 API，但不想把真正的上游 key 直接发出去。Relay Hub 放在中间，用户使用下游 key 调 `/v1` 接口，上游 key 只保存在服务端。
 
 目前支持：
 
@@ -59,10 +59,10 @@ The project is early as public OSS, but it comes from an existing deployed gatew
 - 管理员调用日志，key 会脱敏
 - Vercel / Docker 部署
 
-仓库： https://github.com/zhaozehan0424-design/responses-api-gateway  
-文档/演示： https://responses-api-gateway.vercel.app
+仓库：https://github.com/zhaozehan0424-design/responses-api-gateway  
+文档/演示：https://responses-api-gateway.vercel.app
 
-现在最想收集的是：部署文档是否清楚、OpenAI SDK 兼容性、Discord 登录安全、限速/额度逻辑有没有边界问题。欢迎试用和提 issue。
+现在最想收集的是：部署文档是否清晰、OpenAI SDK 兼容性、Discord 登录安全、限速和额度逻辑有没有边界问题。欢迎试用和提 issue。
 
 ## Sharing Checklist
 
@@ -72,4 +72,3 @@ The project is early as public OSS, but it comes from an existing deployed gatew
 - Ask for testing feedback, not artificial stars.
 - Reply to issues within 24-48 hours.
 - When a real issue is fixed, close it with a commit and cut a small release.
-

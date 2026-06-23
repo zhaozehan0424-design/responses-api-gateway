@@ -255,6 +255,10 @@ Relay Hub is early as a public open-source project, but it comes from an existin
 
 See [ADOPTION.md](./ADOPTION.md) for privacy-preserving prior-usage notes and [ROADMAP.md](./ROADMAP.md) for planned work.
 
+## Related Deployed Work
+
+The same maintainer also published [Memory Palace](https://github.com/zhaozehan0424-design/memory-palace), a mobile-first study aid deployed at [memory-palace-five.vercel.app](https://memory-palace-five.vercel.app). It is a separate learning project, but it records prior hands-on Vercel deployment and maintenance work by the same maintainer.
+
 ## Maintenance
 
 This repository is actively maintained by the primary maintainer. Recent work includes the first public release, production demo restoration, admin-console workflow improvements, model identifier cleanup, registration-capacity maintenance, and public CI checks.

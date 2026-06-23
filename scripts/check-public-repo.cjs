@@ -49,6 +49,8 @@ const requiredReadmeSnippets = [
   "Vercel KV",
   "Adoption",
   "Discord application checklist",
+  "Memory Palace",
+  "https://memory-palace-five.vercel.app",
 ];
 
 const missingReadmeSnippets = requiredReadmeSnippets.filter((snippet) => !readme.includes(snippet));
@@ -60,6 +62,19 @@ if (missingReadmeSnippets.length > 0) {
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 if (!packageJson.repository || !String(packageJson.repository.url || "").includes("responses-api-gateway")) {
   console.error("package_repository_missing");
+  process.exit(1);
+}
+
+const adoption = fs.readFileSync(path.join(root, "ADOPTION.md"), "utf8");
+const requiredAdoptionSnippets = [
+  "Memory Palace",
+  "https://memory-palace-five.vercel.app",
+  "not counted as Relay Hub traffic",
+];
+
+const missingAdoptionSnippets = requiredAdoptionSnippets.filter((snippet) => !adoption.includes(snippet));
+if (missingAdoptionSnippets.length > 0) {
+  console.error(`missing_adoption_sections=${missingAdoptionSnippets.join(",")}`);
   process.exit(1);
 }
 

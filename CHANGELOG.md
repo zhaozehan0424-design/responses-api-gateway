@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.8 - 2026-06-23
+
+Related deployed project documentation and launch-copy cleanup.
+
+- Documented the maintainer's separate Vercel-deployed Memory Palace learning project as related public deployment history.
+- Linked the Memory Palace repository and live demo from the README and adoption notes.
+- Clarified that Memory Palace is not counted as Relay Hub traffic or Relay Hub adoption.
+- Repaired the Chinese launch-post copy in `docs/LAUNCH.md`.
+- Added related-project checks to the public repository verification script.
+
 ## v0.1.7 - 2026-06-23
 
 Discord OAuth configuration validation.

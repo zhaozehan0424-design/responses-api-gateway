@@ -13,6 +13,8 @@ This document records public maintenance work for Relay Hub. It is intentionally
 
 ### 2026-06-23
 
+- Documented the maintainer's related Vercel-deployed Memory Palace learning project without counting it as Relay Hub adoption.
+- Fixed the Chinese launch-post copy so public sharing materials can be reused without encoding artifacts.
 - Added shared Discord OAuth configuration validation and CI checks for common setup mistakes.
 - Documented Discord Developer Portal redirect URI expectations and advanced gate requirements.
 - Added redacted evidence images for the Discord community post, locked-thread notice, and Vercel production usage notifications.

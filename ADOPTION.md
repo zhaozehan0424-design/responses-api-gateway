@@ -30,6 +30,17 @@ Redacted evidence image:
 
 The raw email screenshot is not committed because it includes personal mailbox context. The repository stores only a redacted evidence image that keeps the Vercel sender, usage thresholds, and project/team context visible.
 
+## Related Deployed Project
+
+The same maintainer also maintains a separate Vercel-deployed learning tool:
+
+- Project: [Memory Palace](https://github.com/zhaozehan0424-design/memory-palace)
+- Demo: https://memory-palace-five.vercel.app
+- Purpose: mobile-first study cards, self-checks, comparisons, and review notes for material-processing fundamentals.
+- Deployment note: the project was visible in the maintainer's Vercel dashboard as `memory-palace`, with production deployments marked `Ready` on May 29, 2026.
+
+Memory Palace is not counted as Relay Hub traffic or Relay Hub adoption. It is documented here only as related public deployment and maintenance history from the same maintainer.
+
 ## How Prior Usage Shaped the Project
 
 The Discord pilot and Vercel deployment informed several maintenance decisions before the public release:
