@@ -23,12 +23,14 @@ The deployed Vercel project/team generated enough production traffic to trigger 
 
 - Function Invocation usage reaching 75% of the included free-tier allowance of 1,000,000 invocations.
 - Edge Requests usage reaching 100% of the included free-tier allowance of 1,000,000 requests.
+- Fluid Active CPU usage reaching 75% of the included free-tier allowance of 4 hours.
 
-Redacted evidence image:
+Redacted evidence images:
 
 - [Vercel usage notification](./docs/evidence/vercel-usage-email.png)
+- [Vercel Fluid Active CPU usage notification](./docs/evidence/vercel-fluid-cpu-email.png)
 
-The raw email screenshot is not committed because it includes personal mailbox context. The repository stores only a redacted evidence image that keeps the Vercel sender, usage thresholds, and project/team context visible.
+The raw email screenshots are not committed because they include personal mailbox context. The repository stores only redacted/cropped evidence images that keep the Vercel sender, usage thresholds, and project/team context visible.
 
 ## Related Deployed Project
 

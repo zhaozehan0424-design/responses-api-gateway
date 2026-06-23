@@ -17,6 +17,7 @@ const requiredFiles = [
   "docs/evidence/discord-community-post.png",
   "docs/evidence/discord-locked-thread.png",
   "docs/evidence/vercel-usage-email.png",
+  "docs/evidence/vercel-fluid-cpu-email.png",
   "examples/javascript-openai-sdk.mjs",
   "examples/python-openai-sdk.py",
   "scripts/smoke-tests.cjs",
@@ -70,6 +71,7 @@ const requiredAdoptionSnippets = [
   "Memory Palace",
   "https://memory-palace-five.vercel.app",
   "not counted as Relay Hub traffic",
+  "Fluid Active CPU usage reaching 75%",
 ];
 
 const missingAdoptionSnippets = requiredAdoptionSnippets.filter((snippet) => !adoption.includes(snippet));
