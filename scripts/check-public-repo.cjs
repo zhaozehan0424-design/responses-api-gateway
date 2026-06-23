@@ -20,6 +20,7 @@ const requiredFiles = [
   "examples/javascript-openai-sdk.mjs",
   "examples/python-openai-sdk.py",
   "scripts/smoke-tests.cjs",
+  "scripts/check-discord-config.cjs",
   "docs/screenshots/home.png",
   "docs/screenshots/docs.png",
   "docs/screenshots/dashboard.png",
@@ -47,6 +48,7 @@ const requiredReadmeSnippets = [
   "## SDK Examples",
   "Vercel KV",
   "Adoption",
+  "Discord application checklist",
 ];
 
 const missingReadmeSnippets = requiredReadmeSnippets.filter((snippet) => !readme.includes(snippet));

@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.7 - 2026-06-23
+
+Discord OAuth configuration validation.
+
+- Added shared Discord OAuth configuration validation for login and callback routes.
+- Added explicit operator-facing errors for missing variables, invalid redirect URLs, malformed JSON maps, invalid Discord IDs, and missing guild/bot settings for advanced gates.
+- Added `scripts/check-discord-config.cjs` so Discord config validation is covered by `npm run check`.
+- Documented the Discord Developer Portal redirect checklist in the README and `.env.example`.
+- Prepared the Discord OAuth validation issue for closure.
+
 ## v0.1.6 - 2026-06-23
 
 Adoption evidence images and CI smoke tests.

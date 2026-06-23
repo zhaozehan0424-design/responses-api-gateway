@@ -13,6 +13,8 @@ This document records public maintenance work for Relay Hub. It is intentionally
 
 ### 2026-06-23
 
+- Added shared Discord OAuth configuration validation and CI checks for common setup mistakes.
+- Documented Discord Developer Portal redirect URI expectations and advanced gate requirements.
 - Added redacted evidence images for the Discord community post, locked-thread notice, and Vercel production usage notifications.
 - Added CI smoke tests for OpenAI-compatible endpoint behavior without requiring real upstream API keys.
 - Added adoption notes documenting prior Discord community pilot usage and Vercel usage notifications without exposing private user data.
@@ -69,6 +71,7 @@ This document records public maintenance work for Relay Hub. It is intentionally
 - Verify production storage is `kv` before relying on durable quotas, registrations, or admin logs.
 - Keep public adoption evidence privacy-preserving: redact Discord users, account screenshots, logs, tokens, and request bodies.
 - Keep smoke tests free of real upstream API keys by mocking upstream fetch calls.
+- Keep Discord OAuth login/callback config validation shared so both routes report the same operator-facing setup errors.
 
 ## Vercel CLI DNS Helper
 
@@ -84,4 +87,4 @@ Do not leave `NODE_OPTIONS` set globally. This helper is only for local maintena
 
 ## Near-Term Backlog
 
-- Harden Discord OAuth setup validation and admin-token handling.
+- Harden admin-token handling and add more operator diagnostics.

@@ -9,12 +9,13 @@ Relay Hub is early as a public open-source project. The current focus is making 
 - Keep Vercel KV / Upstash setup docs current for durable quota and log storage.
 - Keep screenshots and adoption evidence current as public workflows change.
 - Improve error-code examples for common client failures.
+- Keep Discord OAuth configuration diagnostics aligned across login and callback routes.
 
 ## v0.2.x
 
 - Add automated compatibility tests for streaming Responses and Chat Completions.
 - Add deployment templates for Vercel and Docker Compose.
-- Harden Discord OAuth setup validation and admin-token handling.
+- Harden admin-token handling and add more operator diagnostics.
 - Add examples for popular OpenAI-compatible SDKs and agent tools.
 
 ## Later

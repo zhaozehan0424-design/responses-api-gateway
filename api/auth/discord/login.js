@@ -1,5 +1,10 @@
 const { signDiscordState } = require("../../../lib/discord-auth");
 const { BRAND } = require("../../../lib/brand");
+const {
+  getDiscordOAuthConfig,
+  getRequestOrigin,
+  isHttpsRequest,
+} = require("../../../lib/discord-config");
 
 module.exports = function handler(req, res) {
   if (req.method !== "GET") {
@@ -12,13 +17,13 @@ module.exports = function handler(req, res) {
     return;
   }
 
-  const config = getDiscordConfig(req);
+  const config = getDiscordOAuthConfig(req);
   if (!config.ok) {
     sendHtml(res, config.statusCode, errorPage("Discord login is not configured", config.message));
     return;
   }
 
-  const requestUrl = new URL(req.url || "/", getOrigin(req));
+  const requestUrl = new URL(req.url || "/", getRequestOrigin(req));
   const mode = requestUrl.searchParams.get("mode") === "login" ? "login" : "register";
   if (mode === "register" && isRegistrationClosed()) {
     sendHtml(res, 403, errorPage("Registration is closed", "Registration is temporarily closed. Please wait for the next opening."));
@@ -43,36 +48,13 @@ module.exports = function handler(req, res) {
   res.end();
 };
 
-function getDiscordConfig(req) {
-  const clientId = process.env.DISCORD_CLIENT_ID;
-  const clientSecret = process.env.DISCORD_CLIENT_SECRET;
-  const keySecret = process.env.DISCORD_KEY_SECRET || process.env.SESSION_SECRET;
-
-  if (!clientId || !clientSecret || !keySecret) {
-    return {
-      ok: false,
-      statusCode: 500,
-      message: "Set DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, and DISCORD_KEY_SECRET or SESSION_SECRET.",
-    };
-  }
-
-  return {
-    ok: true,
-    clientId,
-    clientSecret,
-    keySecret,
-    allowedGuildId: process.env.DISCORD_ALLOWED_GUILD_ID || "",
-    redirectUri: process.env.DISCORD_REDIRECT_URI || `${getOrigin(req)}/api/auth/discord/callback`,
-  };
-}
-
 function parseStatePayload(state) {
   const encodedPayload = state.split(".")[0];
   return JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8"));
 }
 
 function buildStateCookie(req, nonce, maxAge) {
-  const secure = isHttps(req) ? "; Secure" : "";
+  const secure = isHttpsRequest(req) ? "; Secure" : "";
   return [
     `discord_oauth_state=${encodeURIComponent(nonce)}`,
     "Path=/",
@@ -81,17 +63,6 @@ function buildStateCookie(req, nonce, maxAge) {
     `Max-Age=${maxAge}`,
     secure,
   ].filter(Boolean).join("; ");
-}
-
-function getOrigin(req) {
-  const host = req.headers["x-forwarded-host"] || req.headers.host || "localhost";
-  const protocol = String(req.headers["x-forwarded-proto"] || "").split(",")[0] || (String(host).includes("localhost") ? "http" : "https");
-  return `${protocol}://${String(host).split(",")[0]}`;
-}
-
-function isHttps(req) {
-  const protocol = String(req.headers["x-forwarded-proto"] || "").split(",")[0];
-  return protocol === "https" || (!protocol && !String(req.headers.host || "").includes("localhost"));
 }
 
 function isRegistrationClosed() {

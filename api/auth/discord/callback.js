@@ -7,6 +7,11 @@ const {
   saveDiscordAccount,
 } = require("../../../lib/discord-registration");
 const { BRAND } = require("../../../lib/brand");
+const {
+  getDiscordOAuthConfig,
+  getRequestOrigin,
+  isHttpsRequest,
+} = require("../../../lib/discord-config");
 
 const DISCORD_API_BASE = "https://discord.com/api/v10";
 const ADMINISTRATOR = 8n;
@@ -23,13 +28,13 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const config = getDiscordConfig(req);
+  const config = getDiscordOAuthConfig(req);
   if (!config.ok) {
     sendHtml(res, config.statusCode, errorPage("Discord login is not configured", config.message));
     return;
   }
 
-  const requestUrl = new URL(req.url || "/", getOrigin(req));
+  const requestUrl = new URL(req.url || "/", getRequestOrigin(req));
   const code = requestUrl.searchParams.get("code");
   const state = requestUrl.searchParams.get("state");
   const oauthError = requestUrl.searchParams.get("error");
@@ -159,8 +164,8 @@ module.exports = async function handler(req, res) {
       sendJson(res, 200, {
         ok: true,
         mode,
-        dashboard_url: `${getOrigin(req)}/dashboard`,
-        base_url: `${getOrigin(req)}/v1`,
+        dashboard_url: `${getRequestOrigin(req)}/dashboard`,
+        base_url: `${getRequestOrigin(req)}/v1`,
         group,
         discord_user: {
           id: user.id,
@@ -184,58 +189,6 @@ module.exports = async function handler(req, res) {
     sendHtml(res, 502, errorPage("Discord login failed", error.publicMessage || "Unable to complete Discord login right now."));
   }
 };
-
-function getDiscordConfig(req) {
-  const clientId = process.env.DISCORD_CLIENT_ID;
-  const clientSecret = process.env.DISCORD_CLIENT_SECRET;
-  const keySecret = process.env.DISCORD_KEY_SECRET || process.env.SESSION_SECRET;
-  const allowedGuildId = process.env.DISCORD_ALLOWED_GUILD_ID || "";
-  const resourceChannelId = process.env.DISCORD_RESOURCE_CHANNEL_ID || "";
-  const allowedRoleIds = csvEnv("DISCORD_ALLOWED_ROLE_IDS");
-  const roleGroupMap = jsonEnv("DISCORD_ROLE_GROUP_MAP_JSON") || {};
-  const botToken = process.env.DISCORD_BOT_TOKEN || "";
-
-  if (!clientId || !clientSecret || !keySecret) {
-    return {
-      ok: false,
-      statusCode: 500,
-      message: "Set DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, and DISCORD_KEY_SECRET or SESSION_SECRET.",
-    };
-  }
-
-  if ((resourceChannelId || allowedRoleIds.length > 0 || Object.keys(roleGroupMap).length > 0) && !allowedGuildId) {
-    return {
-      ok: false,
-      statusCode: 500,
-      message: "DISCORD_ALLOWED_GUILD_ID is required when role or resource-area checks are enabled.",
-    };
-  }
-
-  if ((resourceChannelId || allowedRoleIds.length > 0 || Object.keys(roleGroupMap).length > 0) && !botToken) {
-    return {
-      ok: false,
-      statusCode: 500,
-      message: "DISCORD_BOT_TOKEN is required to verify Discord roles or resource-area access.",
-    };
-  }
-
-  return {
-    ok: true,
-    clientId,
-    clientSecret,
-    keySecret,
-    redirectUri: process.env.DISCORD_REDIRECT_URI || `${getOrigin(req)}/api/auth/discord/callback`,
-    allowedGuildId,
-    resourceChannelId,
-    botToken,
-    allowedRoleIds,
-    roleGroupMap,
-    blockedUserIds: new Set(csvEnv("DISCORD_BLOCKED_USER_IDS")),
-    defaultGroup: process.env.DISCORD_DEFAULT_GROUP || "guest",
-    groupUserMap: jsonEnv("DISCORD_GROUP_USER_MAP_JSON") || {},
-    keyTtlDays: Number(process.env.DISCORD_KEY_TTL_DAYS || 30),
-  };
-}
 
 async function exchangeCodeForToken(code, config) {
   const response = await fetch("https://discord.com/api/oauth2/token", {
@@ -427,23 +380,6 @@ function isSiteClosed() {
   return ["1", "true", "yes", "on"].includes(String(process.env.SITE_CLOSED || "").toLowerCase());
 }
 
-function csvEnv(name) {
-  return String(process.env[name] || "")
-    .split(",")
-    .map((value) => value.trim())
-    .filter(Boolean);
-}
-
-function jsonEnv(name) {
-  const value = process.env[name];
-  if (!value) return null;
-  try {
-    return JSON.parse(value);
-  } catch {
-    return null;
-  }
-}
-
 function parseCookies(req) {
   const output = {};
   const cookieHeader = String(req.headers.cookie || "");
@@ -456,7 +392,7 @@ function parseCookies(req) {
 }
 
 function clearStateCookie(req) {
-  const secure = isHttps(req) ? "; Secure" : "";
+  const secure = isHttpsRequest(req) ? "; Secure" : "";
   return [
     "discord_oauth_state=",
     "Path=/",
@@ -465,17 +401,6 @@ function clearStateCookie(req) {
     "Max-Age=0",
     secure,
   ].filter(Boolean).join("; ");
-}
-
-function getOrigin(req) {
-  const host = req.headers["x-forwarded-host"] || req.headers.host || "localhost";
-  const protocol = String(req.headers["x-forwarded-proto"] || "").split(",")[0] || (String(host).includes("localhost") ? "http" : "https");
-  return `${protocol}://${String(host).split(",")[0]}`;
-}
-
-function isHttps(req) {
-  const protocol = String(req.headers["x-forwarded-proto"] || "").split(",")[0];
-  return protocol === "https" || (!protocol && !String(req.headers.host || "").includes("localhost"));
 }
 
 function sendJson(res, statusCode, payload) {

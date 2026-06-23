@@ -1,6 +1,6 @@
 {
   "name": "responses-api-gateway",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A lightweight OpenAI-compatible API gateway with downstream keys, quotas, Discord registration, and Vercel deployment support.",
   "license": "MIT",
   "repository": {
@@ -18,9 +18,10 @@
   "type": "commonjs",
   "scripts": {
     "start": "node gateway.js",
-    "check": "npm run check:syntax && npm run check:public && npm run test:smoke",
+    "check": "npm run check:syntax && npm run check:public && npm run check:discord && npm run test:smoke",
     "check:syntax": "node scripts/check-syntax.cjs",
     "check:public": "node scripts/check-public-repo.cjs",
+    "check:discord": "node scripts/check-discord-config.cjs",
     "test:smoke": "node scripts/smoke-tests.cjs",
     "site:status": "node scripts/site-toggle.js status",
     "site:open": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/open-site.ps1",

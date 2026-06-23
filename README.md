@@ -218,6 +218,14 @@ DISCORD_REGISTRATION_LIMIT=20
 DISCORD_ALLOW_LEGACY_KEYS=true
 ```
 
+Discord application checklist:
+
+- In the Discord Developer Portal, add the exact redirect URL shown in `DISCORD_REDIRECT_URI`.
+- Production redirects should use `https://your-domain.example/api/auth/discord/callback`.
+- Local testing can use `http://localhost:4000/api/auth/discord/callback`.
+- `DISCORD_CLIENT_ID` and Discord IDs must be numeric snowflake IDs.
+- `DISCORD_KEY_SECRET` should be a long random signing secret and should not be reused as an upstream API key.
+
 Optional community gates:
 
 ```text
@@ -229,6 +237,8 @@ DISCORD_ROLE_GROUP_MAP_JSON={"role-id-1":"guest","role-id-2":"trusted"}
 DISCORD_GROUP_USER_MAP_JSON={"123456789012345678":"trusted"}
 DISCORD_BLOCKED_USER_IDS=123456789012345678,234567890123456789
 ```
+
+When role gates, role-to-group mapping, or resource-area checks are enabled, `DISCORD_ALLOWED_GUILD_ID` and `DISCORD_BOT_TOKEN` are required. Misconfigured Discord settings return explicit operator-facing errors on the login and callback routes.
 
 ## Security Notes
 
