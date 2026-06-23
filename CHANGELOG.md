@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.6 - 2026-06-23
+
+Adoption evidence images and CI smoke tests.
+
+- Added redacted Discord and Vercel evidence images under `docs/evidence/`.
+- Linked the evidence images from `ADOPTION.md`.
+- Added smoke tests for `GET /v1/models`, `POST /v1/responses`, `POST /v1/chat/completions`, invalid keys, and disallowed models.
+- Updated `npm run check` so smoke tests run in GitHub Actions without real upstream API keys.
+- Prepared the endpoint smoke-test issue for closure.
+
 ## v0.1.5 - 2026-06-23
 
 Prior usage and adoption notes.

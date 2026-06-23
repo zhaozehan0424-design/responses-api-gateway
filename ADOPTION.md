@@ -10,6 +10,11 @@ Related Discord post:
 
 - https://discord.com/channels/1134557553011998840/1513823428614946956
 
+Redacted evidence images:
+
+- [Discord community post](./docs/evidence/discord-community-post.png)
+- [Discord locked-thread notice](./docs/evidence/discord-locked-thread.png)
+
 The Discord link may require access to the original server and channel. The repository does not publish private Discord messages, user IDs, avatars, API keys, or raw request logs.
 
 ## Vercel Usage Evidence
@@ -19,7 +24,11 @@ The deployed Vercel project/team generated enough production traffic to trigger 
 - Function Invocation usage reaching 75% of the included free-tier allowance of 1,000,000 invocations.
 - Edge Requests usage reaching 100% of the included free-tier allowance of 1,000,000 requests.
 
-The raw email screenshots are not committed because they include personal mailbox context. If needed for private review, the maintainer can provide redacted screenshots that keep only the Vercel sender, usage threshold, and project/team context visible.
+Redacted evidence image:
+
+- [Vercel usage notification](./docs/evidence/vercel-usage-email.png)
+
+The raw email screenshot is not committed because it includes personal mailbox context. The repository stores only a redacted evidence image that keeps the Vercel sender, usage thresholds, and project/team context visible.
 
 ## How Prior Usage Shaped the Project
 
