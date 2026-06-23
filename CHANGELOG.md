@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.3 - 2026-06-23
+
+SDK compatibility examples.
+
+- Added JavaScript and Python OpenAI SDK examples.
+- Added `docs/SDK_EXAMPLES.md` with base URL, downstream key, and error-behavior notes.
+- Linked SDK examples from the README.
+- Prepared the SDK examples issue for closure.
+
 ## v0.1.2 - 2026-06-23
 
 Public launch materials and screenshots.

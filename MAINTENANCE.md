@@ -13,6 +13,8 @@ This document records public maintenance work for Relay Hub. It is intentionally
 
 ### 2026-06-23
 
+- Added JavaScript and Python SDK examples for OpenAI-compatible clients.
+- Documented SDK setup with downstream keys and Relay Hub `/v1` base URLs.
 - Added public README screenshots for the landing page, docs, user dashboard, and admin call-log workflow.
 - Added a launch kit with Chinese and English posts for sharing the project without asking for artificial stars.
 - Tightened the README top section so visitors can understand the project value before scrolling.

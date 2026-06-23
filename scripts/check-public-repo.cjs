@@ -11,6 +11,9 @@ const requiredFiles = [
   "SECURITY.md",
   "MAINTENANCE.md",
   "docs/LAUNCH.md",
+  "docs/SDK_EXAMPLES.md",
+  "examples/javascript-openai-sdk.mjs",
+  "examples/python-openai-sdk.py",
   "docs/screenshots/home.png",
   "docs/screenshots/docs.png",
   "docs/screenshots/dashboard.png",
@@ -35,6 +38,7 @@ const requiredReadmeSnippets = [
   "## Security Notes",
   "## Maintenance",
   "## Screenshots",
+  "## SDK Examples",
 ];
 
 const missingReadmeSnippets = requiredReadmeSnippets.filter((snippet) => !readme.includes(snippet));

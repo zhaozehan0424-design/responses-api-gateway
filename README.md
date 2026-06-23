@@ -4,7 +4,7 @@ OpenAI-compatible API gateway with downstream keys, quotas, Discord auth, admin 
 
 Relay Hub sits between users and an upstream model provider. Users call a familiar OpenAI-style `/v1` API with downstream keys, while the real upstream base URL and upstream API key stay server-side.
 
-[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
+[Demo site](https://responses-api-gateway.vercel.app) - [Live docs](https://responses-api-gateway.vercel.app/docs) - [SDK examples](./docs/SDK_EXAMPLES.md) - [Roadmap](./ROADMAP.md) - [Maintenance](./MAINTENANCE.md) - [Launch kit](./docs/LAUNCH.md)
 
 ![Relay Hub public landing page](./docs/screenshots/home.png)
 
@@ -113,8 +113,16 @@ curl http://localhost:4000/v1/chat/completions \
       { "role": "user", "content": "Reply with OK only." }
     ],
     "max_tokens": 16
-  }'
+}'
 ```
+
+## SDK Examples
+
+Relay Hub works with OpenAI-compatible SDKs by setting the base URL to your deployed `/v1` endpoint and using a downstream key:
+
+- [JavaScript OpenAI SDK example](./examples/javascript-openai-sdk.mjs)
+- [Python OpenAI SDK example](./examples/python-openai-sdk.py)
+- [SDK setup notes](./docs/SDK_EXAMPLES.md)
 
 ## Deploy To Vercel
 
