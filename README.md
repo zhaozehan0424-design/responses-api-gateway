@@ -263,6 +263,8 @@ The same maintainer also published [Memory Palace](https://github.com/zhaozehan0
 
 This repository is actively maintained by the primary maintainer. Recent work includes the first public release, production demo restoration, admin-console workflow improvements, model identifier cleanup, registration-capacity maintenance, and public CI checks.
 
+Run `npm run check` before releases. The check suite covers JavaScript syntax, public repository files, Discord configuration validation, smoke tests, and a maintainer audit for sensitive tracked files, environment-variable documentation, and maintenance docs.
+
 See [MAINTENANCE.md](./MAINTENANCE.md) and [CHANGELOG.md](./CHANGELOG.md).
 
 ## Contributing

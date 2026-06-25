@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.9 - 2026-06-25
+
+Maintainer security audit and configuration documentation.
+
+- Added `scripts/check-maintainer-audit.cjs` to verify sensitive files are not tracked, runtime environment variables are documented, and maintenance/security docs stay present.
+- Added the maintainer audit to `npm run check` so CI covers repository hygiene alongside syntax, public repo, Discord config, and smoke checks.
+- Documented the remaining runtime environment variables in `.env.example`, including secondary upstream, CORS, timeout, site switches, registration KV keys, Upstash aliases, and cost-ledger prefix settings.
+- Updated maintenance notes to record the June 25 repository hygiene pass.
+
 ## v0.1.8 - 2026-06-23
 
 Related deployed project documentation, launch-copy cleanup, and additional Vercel evidence.

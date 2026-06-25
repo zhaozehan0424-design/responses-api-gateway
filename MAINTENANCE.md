@@ -11,6 +11,13 @@ This document records public maintenance work for Relay Hub. It is intentionally
 
 ## Maintenance Log
 
+### 2026-06-25
+
+- Added a maintainer security audit that checks tracked files for sensitive local artifacts, verifies `.gitignore` coverage, and confirms runtime environment variables are documented in `.env.example`.
+- Added the maintainer security audit to `npm run check` so GitHub Actions now covers repository hygiene together with syntax, public repo, Discord config, and smoke tests.
+- Completed an environment-variable documentation pass for secondary upstream settings, CORS, request timeout, site closure switches, Discord registration storage keys, Upstash aliases, and cost-ledger prefix settings.
+- Bumped the package metadata to `v0.1.9` for this maintenance batch.
+
 ### 2026-06-23
 
 - Documented the maintainer's related Vercel-deployed Memory Palace learning project without counting it as Relay Hub adoption.
