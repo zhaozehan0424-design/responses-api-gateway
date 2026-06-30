@@ -76,6 +76,7 @@ function checkMaintenanceDocs() {
     "README.md",
     "CHANGELOG.md",
     "MAINTENANCE.md",
+    "REPOSITORY_STATUS.md",
     "SECURITY.md",
     "CONTRIBUTING.md",
     "ADOPTION.md",
@@ -92,9 +93,9 @@ function checkMaintenanceDocs() {
 
   const packageJson = JSON.parse(readText("package.json"));
   const changelog = readText("CHANGELOG.md");
-  const latestHeader = `## v${packageJson.version} - 2026-06-25`;
-  if (!changelog.includes(latestHeader)) {
-    failures.push(`missing_changelog_header=${latestHeader}`);
+  const latestHeaderPattern = new RegExp(`^## v${escapeRegExp(packageJson.version)} - \\d{4}-\\d{2}-\\d{2}`, "m");
+  if (!latestHeaderPattern.test(changelog)) {
+    failures.push(`missing_changelog_header_for_version=v${packageJson.version}`);
   }
 
   requireSnippets("README.md", [
@@ -118,6 +119,10 @@ function checkMaintenanceDocs() {
     "Run `npm run check` before releases.",
     "Keep `.env`, `.vercel/`, logs, generated outputs, and local secret files out of commits.",
   ]);
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function requireSnippets(file, snippets) {
@@ -194,3 +199,4 @@ function readText(file) {
 function toPosixPath(file) {
   return file.split(path.sep).join("/");
 }
+

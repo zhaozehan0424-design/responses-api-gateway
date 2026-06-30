@@ -98,3 +98,12 @@ Do not leave `NODE_OPTIONS` set globally. This helper is only for local maintena
 ## Near-Term Backlog
 
 - Harden admin-token handling and add more operator diagnostics.
+
+## 2026-06-30 - Cross-repository maintenance audit
+
+- Added `REPOSITORY_STATUS.md` as a quick maintainer/readiness dashboard.
+- Re-ran verification checks:
+- `npm run check -> syntax_ok=31, public_repo_ok=true, maintainer_audit_ok=true, discord_config_ok=true, smoke_tests_ok=true`
+- Confirmed README, changelog, security, contribution, issue-template, PR-template, license, and CI files are present.
+- Confirmed public documentation does not require committing private keys or local runtime secrets.
+

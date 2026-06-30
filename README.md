@@ -1,4 +1,7 @@
 # Relay Hub
+[![CI](https://github.com/zhaozehan0424-design/responses-api-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/zhaozehan0424-design/responses-api-gateway/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[Repository status](./REPOSITORY_STATUS.md) records the latest maintenance checks and release-readiness notes.
 
 OpenAI-compatible API gateway with downstream keys, quotas, Discord auth, admin logs, and Vercel/Docker deployment support.
 

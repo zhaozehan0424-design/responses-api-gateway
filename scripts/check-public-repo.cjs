@@ -11,6 +11,7 @@ const requiredFiles = [
   "CONTRIBUTING.md",
   "SECURITY.md",
   "MAINTENANCE.md",
+  "REPOSITORY_STATUS.md",
   "docs/LAUNCH.md",
   "docs/SDK_EXAMPLES.md",
   "docs/VERCEL_KV_UPSTASH.md",
